@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a simple tabs component using HTML, CSS, and JavaScript</title>
+    <style>
+        .tabbed-menu {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            position: sticky;
+            height: 35px;
+            top: 0;
+            z-index: 1;
+        }
+
+        .tabbed-menu button {
+            display: block;
+            padding: 10px 10px;
+            background-color: blueviolet;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: large;
+            width: 100%;
+            border-radius: 2px;
+        }
+
+        .tabbed-menu button.active {
+            background: linear-gradient(to right, orange, grey, black, yellow, white, pink, violet);
+            border-bottom: 5px groove transparent;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media screen and (max-width: 600px) {
+            .tabbed-menu {
+                flex-wrap: wrap;
+            }
+
+            .tabbed-menu button {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tabbed-menu">
+        <button class="tab-button active" onclick="openTab(event, 'tab1')">Tab 1</button>
+        <button class="tab-button" onclick="openTab(event, 'tab2')">Tab 2</button>
+        <button class="tab-button" onclick="openTab(event, 'tab3')">Tab 3</button>
+        <button class="tab-button" onclick="openTab(event, 'tab4')">Tab 4</button>
+    </div>
+
+    <!-- Tab contents -->
+    <div id="tab1" class="tab-content active">
+        <h1>This is Tab -1</h1>
+        <p>This is content of tab 1</p>
+    </div>
+    <div id="tab2" class="tab-content">
+        <h1>This is Tab -2</h1>
+        <p>This is content of tab 2</p>
+    </div>
+    <div id="tab3" class="tab-content">
+        <h1>This is Tab -3</h1>
+        <p>This is content of tab 3</p>
+    </div>
+    <div id="tab4" class="tab-content">
+        <h1>This is Tab -4</h1>
+        <p>This is content of tab 4</p>
+    </div>
+
+    <script>
+        function openTab(event, tabName) {
+            // Get all tab contents and hide them
+            let tabContent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+
+            // Remove "active" class from all tab buttons
+            let tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Display the clicked tab content and add "active" class to the clicked tab button
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.classList.add("active");
+        }
+
+        // Automatically show the first tab on page load
+        document.getElementById("tab1").style.display = "block";
+    </script>
+</body>
+</html>
