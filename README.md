@@ -5,7 +5,7 @@ Each tab displays its respective content when clicked, and the content of the cu
 
 ## Project Page URL
 
-You can view the live demo of this project [here](http://127.0.0.1:5500/tabs.html).
+You can view the live demo of this project (http://127.0.0.1:5500/tabs.html).
 
 ## Instructions to Run the Project
 
