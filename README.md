@@ -5,7 +5,7 @@ Each tab displays its respective content when clicked, and the content of the cu
 
 ## Project Page URL
 
-You can view the live demo of this project [here](https://anonymous2024-spec.github.io/js-sh-projects/tabs/tabs.html). 
+You can view the live demo of this project (https://anonymous2024-spec.github.io/js-sh-projects/tabs/tabs.html). 
 
 ## Instructions to Run the Project
 
