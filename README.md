@@ -118,9 +118,3 @@ The banner uses localStorage to save user preferences:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📮 Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/cookie-consent-banner](https://github.com/yourusername/cookie-consent-banner)
