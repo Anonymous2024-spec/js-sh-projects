@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .cookie-banner {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: #f8f9fa;
+      padding: 20px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      transition: bottom 0.3s ease-in-out;
+    }
+
+    .cookie-banner.show {
+      bottom: 0;
+    }
+
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cookie-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-settings {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+
+    .cookie-setting {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      margin-right: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+  </style>
+</head>
+<body>
+  <div class="cookie-banner">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h3>Cookie Settings</h3>
+        <p>We use cookies to enhance your browsing experience and analyze our traffic. Please choose your preferences below.</p>
+        
+        <div class="cookie-settings">
+          <div class="cookie-setting">
+            <label class="switch">
+              <input type="checkbox" id="essentialCookies" checked disabled>
+              <span class="slider"></span>
+            </label>
+            <div>
+              <strong>Essential Cookies</strong>
+              <p>Required for the website to function properly. Cannot be disabled.</p>
+            </div>
+          </div>
+          
+          <div class="cookie-setting">
+            <label class="switch">
+              <input type="checkbox" id="marketingCookies">
+              <span class="slider"></span>
+            </label>
+            <div>
+              <strong>Marketing Cookies</strong>
+              <p>Used to deliver personalized ads and analyze traffic patterns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cookie-actions">
+        <button class="btn btn-secondary" id="rejectAll">Reject All</button>
+        <button class="btn btn-primary" id="acceptSelected">Accept Selected</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const banner = document.querySelector('.cookie-banner');
+      const acceptBtn = document.getElementById('acceptSelected');
+      const rejectBtn = document.getElementById('rejectAll');
+      const marketingCheckbox = document.getElementById('marketingCookies');
+
+      // Check if user has already made a choice
+      const cookieChoice = localStorage.getItem('cookieChoice');
+      if (!cookieChoice) {
+        // Show banner with animation
+        setTimeout(() => {
+          banner.classList.add('show');
+        }, 1000);
+      }
+
+      // Load saved preferences
+      if (localStorage.getItem('marketingCookies') === 'true') {
+        marketingCheckbox.checked = true;
+      }
+
+      acceptBtn.addEventListener('click', () => {
+        saveCookiePreferences();
+        hideBanner();
+      });
+
+      rejectBtn.addEventListener('click', () => {
+        marketingCheckbox.checked = false;
+        saveCookiePreferences();
+        hideBanner();
+      });
+
+      function saveCookiePreferences() {
+        localStorage.setItem('cookieChoice', 'made');
+        localStorage.setItem('marketingCookies', marketingCheckbox.checked);
+        
+        // Here you would typically set actual cookies based on preferences
+        if (marketingCheckbox.checked) {
+          console.log('Marketing cookies enabled');
+          // setMarketingCookies();
+        } else {
+          console.log('Marketing cookies disabled');
+          // removeMarketingCookies();
+        }
+      }
+
+      function hideBanner() {
+        banner.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
