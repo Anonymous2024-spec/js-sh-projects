@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      font-family: Arial, sans-serif;
+    }
+
+    .textarea-wrapper {
+      position: relative;
+    }
+
+    .character-textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 1.5;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+
+    .character-textarea:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    .character-textarea.limit-reached {
+      border-color: #dc3545;
+    }
+
+    .counter {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .counter.limit-reached {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .limit-message {
+      margin-top: 8px;
+      color: #dc3545;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .limit-message.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Character Counter Textarea</h2>
+    <div class="textarea-wrapper">
+      <textarea 
+        class="character-textarea" 
+        placeholder="Start typing... (Maximum 200 characters)"
+      ></textarea>
+      <div class="counter">0 / 200</div>
+    </div>
+    <div class="limit-message">Character limit reached!</div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const textarea = document.querySelector('.character-textarea');
+      const counter = document.querySelector('.counter');
+      const limitMessage = document.querySelector('.limit-message');
+      const CHAR_LIMIT = 200;
+      
+      function updateCounter() {
+        const currentLength = textarea.value.length;
+        counter.textContent = `${currentLength} / ${CHAR_LIMIT}`;
+        
+        // Visual feedback when limit is reached
+        if (currentLength >= CHAR_LIMIT) {
+          textarea.classList.add('limit-reached');
+          counter.classList.add('limit-reached');
+          limitMessage.classList.add('show');
+        } else {
+          textarea.classList.remove('limit-reached');
+          counter.classList.remove('limit-reached');
+          limitMessage.classList.remove('show');
+        }
+      }
+
+      textarea.addEventListener('input', function(e) {
+        const text = this.value;
+        
+        // Prevent typing beyond the limit
+        if (text.length > CHAR_LIMIT) {
+          this.value = text.slice(0, CHAR_LIMIT);
+        }
+        
+        updateCounter();
+      });
+
+      // Handle pasting text
+      textarea.addEventListener('paste', function(e) {
+        setTimeout(() => {
+          if (this.value.length > CHAR_LIMIT) {
+            this.value = this.value.slice(0, CHAR_LIMIT);
+            updateCounter();
+          }
+        }, 0);
+      });
+    });
+  </script>
+</body>
+</html>
