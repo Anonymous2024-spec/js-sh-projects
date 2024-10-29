@@ -1,20 +1,20 @@
-# Cookie Consent Banner
+# Character Counter Textarea
 
-A lightweight, customizable cookie consent banner implementation with support for different cookie categories and user preferences management.
+A lightweight, responsive textarea component with real-time character counting and maximum limit enforcement. Perfect for forms, comment sections, or any text input that requires length validation.
 
 ## 🔴 Live Demo
-Visit the live demo: [Cookie Consent Banner Demo](https://roadmap.sh/projects/cookie-consent) 
+Visit the live demo: [Character Counter Demo](https://roadmap.sh/projects/restricted-textarea) 
 *(Note: Replace with your actual project URL when deployed)*
 
 ## ✨ Features
 
-- 🎨 Modern, responsive design
-- 🔄 Smooth animations
-- 💾 Local storage for preference management
-- ✅ Multiple cookie categories (Essential & Marketing)
-- 📱 Mobile-friendly interface
-- ♿ Accessible toggle switches
-- 🔒 GDPR-compliant structure
+- 📝 Real-time character counting
+- 🚫 Maximum character limit enforcement
+- 🎨 Visual feedback on limit reached
+- 📱 Responsive design
+- ✨ Smooth animations
+- 📋 Paste event handling
+- 🎯 No external dependencies
 
 ## 🚀 Quick Start
 
@@ -22,87 +22,88 @@ Visit the live demo: [Cookie Consent Banner Demo](https://roadmap.sh/projects/co
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/cookie-consent-banner.git
-cd cookie-consent-banner
+git clone https://github.com/yourusername/character-counter.git
+cd character-counter
 ```
 
-2. No additional dependencies are required! The project uses vanilla JavaScript and CSS.
+2. No additional dependencies required! The project uses vanilla JavaScript and CSS.
 
 ### Usage
 
-1. Open `index.html` in your web browser to see the cookie consent banner in action.
-   - You can use a local development server like Live Server in VS Code
+1. Open `index.html` in your web browser to see the character counter in action.
+   - Use a local development server (like Live Server in VS Code)
    - Or simply double-click the index.html file
 
 2. To integrate into your existing project:
 
 ```html
 <!-- Add to your HTML -->
-<link rel="stylesheet" href="path/to/cookie-banner.css">
-<script src="path/to/cookie-banner.js"></script>
+<div class="textarea-wrapper">
+  <textarea 
+    class="character-textarea" 
+    placeholder="Start typing... (Maximum 200 characters)"
+  ></textarea>
+  <div class="counter">0 / 200</div>
+</div>
+<div class="limit-message">Character limit reached!</div>
 ```
 
-Then copy the banner HTML structure:
+```javascript
+// Add the JavaScript
+const textarea = document.querySelector('.character-textarea');
+const counter = document.querySelector('.counter');
+const limitMessage = document.querySelector('.limit-message');
+const CHAR_LIMIT = 200;
 
-```html
-<div class="cookie-banner">
-  <!-- Cookie banner content -->
-</div>
+// Add the event listeners and functions from the script section
 ```
 
 ## 🛠️ Customization
 
+### Modifying Character Limit
+Change the `CHAR_LIMIT` constant in the JavaScript:
+
+```javascript
+const CHAR_LIMIT = 500; // Change to your desired limit
+```
+
 ### Styling
-Modify the CSS variables in the stylesheet to match your brand colors:
+Modify the CSS variables to match your brand colors:
 
 ```css
-.cookie-banner {
-    /* Modify background color */
-    background: #f8f9fa;
-    /* Modify shadow */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+.character-textarea {
+    /* Modify border color */
+    border: 2px solid #ccc;
+    /* Modify focus color */
+    border-color: #007bff;
 }
 
-.btn-primary {
-    /* Modify primary button color */
-    background: #007bff;
+.counter {
+    /* Modify counter style */
+    background: rgba(255, 255, 255, 0.9);
+    color: #666;
 }
 ```
-
-### Adding New Cookie Categories
-Add new cookie categories by extending the HTML structure:
-
-```html
-<div class="cookie-setting">
-    <label class="switch">
-        <input type="checkbox" id="newCookieCategory">
-        <span class="slider"></span>
-    </label>
-    <div>
-        <strong>New Cookie Category</strong>
-        <p>Description of the new cookie category.</p>
-    </div>
-</div>
-```
-
-## 📝 Cookie Categories
-
-1. **Essential Cookies**
-   - Required for basic website functionality
-   - Cannot be disabled
-   - No personal data collection
-
-2. **Marketing Cookies**
-   - Used for personalized advertising
-   - Analytics and traffic pattern analysis
-   - Optional and can be disabled
 
 ## 💻 Technical Details
 
-### Local Storage
-The banner uses localStorage to save user preferences:
-- `cookieChoice`: Tracks if user has made a choice
-- `marketingCookies`: Stores marketing cookies preference
+### Features Explained
+
+1. **Real-time Counting**
+   - Updates character count as user types
+   - Handles backspace and delete operations
+   - Manages paste events
+
+2. **Limit Enforcement**
+   - Prevents typing beyond limit
+   - Truncates pasted text if it exceeds limit
+   - Visual feedback when limit is reached
+
+3. **Visual Feedback**
+   - Border color changes
+   - Counter color updates
+   - Warning message appears
+   - Smooth transitions
 
 ### Browser Support
 - Chrome (latest)
@@ -111,10 +112,5 @@ The banner uses localStorage to save user preferences:
 - Edge (latest)
 - Opera (latest)
 
-## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+
